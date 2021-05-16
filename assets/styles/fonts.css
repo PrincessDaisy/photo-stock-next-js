@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'SFUIDisplayMedium';
+    src: local('SFUIDisplayMedium'), url('../fonts/sf-ui-display-medium.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'SFUIDisplayLight';
+    src: local('SFUIDisplayLight'), url('../fonts/sf-ui-display-light.otf') format('opentype');
+  }
+  @font-face {
+    font-family: 'SFUIDisplayBold';
+    src: local('SFUIDisplayBold'), url('../fonts/sf-ui-display-bold.otf') format('opentype');
+  }
