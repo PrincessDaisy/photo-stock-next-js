@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { QueryClient, useQuery } from 'react-query';
-import { dehydrate } from 'react-query/hydration';
+// import { dehydrate } from 'react-query/hydration';
 import { useRouter } from 'next/router';
 import { Container, Flex } from '../ComponentsLibrary';
 import HeaderLinkItem from './HeaderLinkItem';
