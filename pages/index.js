@@ -1,9 +1,20 @@
 import Header from '../components/Header';
+import PhotosAPI from '../api';
 
-export default function Home() {
+export async function getStaticProps() {
+  const { data: topicsListData } = await PhotosAPI.getTopicList();
+
+  return {
+    props: {
+      topicsListData,
+    },
+  };
+}
+
+export default function Home({ topicsListData }) {
   return (
     <>
-      <Header />
+      <Header topicsListData={topicsListData} />
     </>
   );
 }

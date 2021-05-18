@@ -9,15 +9,13 @@ const HeaderLink = styled.div`
     font-size: 24px;
     &:nth-child(1) {
         font-family: 'SFUIDisplayBold';
+        margin-left: 0;
     };
     &:nth-child(2) {
         margin-left: auto;
     };
     @media (max-width: 991px) {
       margin-left: 22px;
-      &:nth-child(1) {
-        margin-left: 0;
-      };
     }
 `;
 const LinkText = styled.span`

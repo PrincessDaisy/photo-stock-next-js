@@ -1,11 +1,9 @@
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { Container, Flex } from '../ComponentsLibrary';
 import HeaderLinkItem from './HeaderLinkItem';
 import linksDataArr from './HeaderData';
 import HeaderSearch from './HeaderSearch';
-import PhotosAPI from '../../api';
 import HeaderTopicItem from './HeaderTopicItem';
 
 const HeaderWrap = styled.div`
@@ -15,25 +13,28 @@ const HeaderWrap = styled.div`
     font-size: 20px;
 `;
 
-export async function getStaticProps() {
-  const fetchTopics = async () => {
-    const { data } = await PhotosAPI.getTopicList();
-    return data;
-  };
-  const { data: topicsListData } = useQuery('topicsList', () => fetchTopics());
+const TopicWrapper = styled(Flex)`
+    @media (max-width: 991px) {
+      justify-content: left;
+    }
+`;
 
-  console.log(topicsListData);
-
-  return {
-    props: {
-      topicsListData,
-    },
-  };
-}
+const Shadow = styled.div`
+  position: relative;
+  overflow-x: hidden;
+  :after {
+    content: '';
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgba(0, 0, 0, 1) 80%);
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    bottom: 0;
+    width: 50%;
+    z-index: 10;
+  }
+`;
 
 export default function Header({ topicsListData }) {
-  // const { setSearchVal, topicsListData } = props;
-  console.log(topicsListData);
   const router = useRouter();
 
   return (
@@ -46,10 +47,14 @@ export default function Header({ topicsListData }) {
         && (
         <>
           <HeaderSearch setSearchVal="2" />
-          {!!topicsListData
-          && topicsListData.map((item) => <HeaderTopicItem title={item.title} key={item.id} />)}
         </>
         )}
+        <Shadow>
+          <TopicWrapper justify="center" width="1400px">
+            {!!topicsListData
+          && topicsListData.map((item) => <HeaderTopicItem title={item.title} key={item.id} />)}
+          </TopicWrapper>
+        </Shadow>
       </Container>
     </HeaderWrap>
   );
