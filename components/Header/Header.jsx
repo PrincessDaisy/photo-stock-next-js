@@ -22,6 +22,8 @@ export async function getStaticProps() {
   };
   const { data: topicsListData } = useQuery('topicsList', () => fetchTopics());
 
+  console.log(topicsListData);
+
   return {
     props: {
       topicsListData,
@@ -29,9 +31,9 @@ export async function getStaticProps() {
   };
 }
 
-export default function Header(props) {
-  const { setSearchVal, topicsListData } = props;
-
+export default function Header({ topicsListData }) {
+  // const { setSearchVal, topicsListData } = props;
+  console.log(topicsListData);
   const router = useRouter();
 
   return (
@@ -43,8 +45,9 @@ export default function Header(props) {
         {router.pathname === '/'
         && (
         <>
-          <HeaderSearch setSearchVal={setSearchVal} />
-          {topicsListData.map((item) => <HeaderTopicItem title={item.title} key={item.id} />)}
+          <HeaderSearch setSearchVal="2" />
+          {!!topicsListData
+          && topicsListData.map((item) => <HeaderTopicItem title={item.title} key={item.id} />)}
         </>
         )}
       </Container>
