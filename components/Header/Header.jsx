@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { QueryClient, useQuery } from 'react-query';
-// import { dehydrate } from 'react-query/hydration';
+import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { Container, Flex } from '../ComponentsLibrary';
 import HeaderLinkItem from './HeaderLinkItem';
@@ -16,27 +15,24 @@ const HeaderWrap = styled.div`
     font-size: 20px;
 `;
 
-const fetchTopics = async () => {
-  const { data } = await PhotosAPI.getTopicList();
-  return data;
-};
-
 export async function getStaticProps() {
-  const topics = await fetchTopics();
+  const fetchTopics = async () => {
+    const { data } = await PhotosAPI.getTopicList();
+    return data;
+  };
+  const { data: topicsListData } = useQuery('topicsList', () => fetchTopics());
 
   return {
     props: {
-      topics,
+      topicsListData,
     },
   };
 }
 
 export default function Header(props) {
-  const { setSearchVal, topics } = props;
+  const { setSearchVal, topicsListData } = props;
 
   const router = useRouter();
-
-  const { data: topicsListData, isSuccess: isSuccessTopicsListFetch } = useQuery('topicsList', fetchTopics, { initialData: topics });
 
   return (
     <HeaderWrap>
@@ -48,8 +44,7 @@ export default function Header(props) {
         && (
         <>
           <HeaderSearch setSearchVal={setSearchVal} />
-          {!!isSuccessTopicsListFetch
-              && topicsListData.map((item) => <HeaderTopicItem title={item.title} key={item.id} />)}
+          {topicsListData.map((item) => <HeaderTopicItem title={item.title} key={item.id} />)}
         </>
         )}
       </Container>
