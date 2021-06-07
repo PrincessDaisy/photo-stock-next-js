@@ -33,7 +33,6 @@ const UserProfile = styled.div`
 
 const ImageWrapper = styled.div`
     margin-bottom: 10px;
-    margin-right: 10px;
     position: relative;
     overflow: hidden;
     border-radius: 5px;
@@ -48,9 +47,6 @@ const ImageWrapper = styled.div`
         ${UserProfile} {
             margin: 0 auto;
         }
-    }
-    @media (max-width: 991px) {
-        margin-right: 0;
     }
 `;
 
@@ -95,7 +91,7 @@ export default function Photo({ item }) {
   return (
     <ImageWrapper key={item.id}>
       <PhotoImage
-        src={item.urls.regular}
+        src={item.urls.small}
         alt={item.alt_description}
         width="100%"
         height="auto"

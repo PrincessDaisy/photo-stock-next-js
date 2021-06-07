@@ -1,9 +1,7 @@
 import { Formik, Form } from 'formik';
 import HeaderInput from './HeaderInput';
 
-export default function HeaderSearch(props) {
-  const { setSearchVal } = props;
-
+export default function HeaderSearch({ setSearchValue }) {
   const SetSearchHistory = (searchValue) => {
     function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -31,7 +29,7 @@ export default function HeaderSearch(props) {
           page: 1,
         }}
         onSubmit={(value) => {
-          setSearchVal(value.searchValue);
+          setSearchValue(value.searchValue);
           SetSearchHistory(value.searchValue);
         }}
       >

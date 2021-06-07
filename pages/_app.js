@@ -5,13 +5,11 @@ import { Hydrate } from 'react-query/hydration';
 import '../assets/styles/normalize.css';
 import '../assets/styles/fonts.css';
 
-export default function App({ Component, pageProps }) {
-  const queryClientRef = React.useRef();
-  if (!queryClientRef.current) {
-    queryClientRef.current = new QueryClient();
-  }
+export default function MyApp({ Component, pageProps }) {
+  const [queryClient] = React.useState(() => new QueryClient());
+
   return (
-    <QueryClientProvider client={queryClientRef.current}>
+    <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <Component {...pageProps} />
       </Hydrate>

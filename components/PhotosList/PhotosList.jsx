@@ -22,8 +22,12 @@ const DirControl = styled(Flex)`
     }
 `;
 
+const FlexChild = styled.div`
+  flex-basis: 33.33333%; 
+  padding: 0 5px 0 5px;
+`;
+
 export default function PhotosList({ photosListData }) {
-  console.log(photosListData);
   return (
     <Container>
       <DirControl justify="center">
@@ -43,7 +47,7 @@ export default function PhotosList({ photosListData }) {
         </button>
       </DirControl>
       <Flex>
-        <div>
+        <FlexChild>
           {!!photosListData
               && photosListData.map((item, index) => {
                 if (index % 3 === 1 || index === 1) {
@@ -51,8 +55,8 @@ export default function PhotosList({ photosListData }) {
                 }
                 return '';
               })}
-        </div>
-        <div>
+        </FlexChild>
+        <FlexChild>
           {!!photosListData
             && photosListData.map((item, index) => {
               if (index % 3 === 2 || index === 2) {
@@ -60,8 +64,8 @@ export default function PhotosList({ photosListData }) {
               }
               return '';
             })}
-        </div>
-        <div>
+        </FlexChild>
+        <FlexChild>
           {!!photosListData
             && photosListData.map((item, index) => {
               if (index % 3 === 0) {
@@ -69,7 +73,7 @@ export default function PhotosList({ photosListData }) {
               }
               return '';
             })}
-        </div>
+        </FlexChild>
       </Flex>
     </Container>
   );

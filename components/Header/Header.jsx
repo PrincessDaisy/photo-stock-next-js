@@ -34,7 +34,7 @@ const Shadow = styled.div`
   }
 `;
 
-export default function Header({ topicsListData }) {
+export default function Header({ topicsListData, setSearchValue }) {
   const router = useRouter();
 
   return (
@@ -46,7 +46,7 @@ export default function Header({ topicsListData }) {
         {router.pathname === '/'
         && (
         <>
-          <HeaderSearch setSearchVal="2" />
+          <HeaderSearch setSearchValue={setSearchValue} />
         </>
         )}
         <Shadow>
