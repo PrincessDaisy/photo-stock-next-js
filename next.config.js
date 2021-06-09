@@ -5,8 +5,12 @@ module.exports = withImages({
     exclude: path.resolve(__dirname, 'src/assets/svg'),
     webpack(config, options) {
         return config
-    }
+    },
+    images: {
+        domains: ['images.unsplash.com'],
+      },
 })
+
 // module.exports = {
 //     webpack(config) {
 //       config.module.rules.push({
