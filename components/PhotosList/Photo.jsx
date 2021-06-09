@@ -58,6 +58,17 @@ const UserPhoto = styled.div`
     margin: 0px auto;
 `;
 
+const HoveringIcon = styled.div`
+  transition: .8s;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+const StyledButton = styled.button`
+  cursor: pointer;
+`;
+
 export default function Photo({ item }) {
   const [inFavList, setInFavList] = useState(false);
 
@@ -116,14 +127,14 @@ export default function Photo({ item }) {
           </div>
         </UserProfile>
         <Flex justify="space-between" width="185px" margin="40px auto 0">
-          <div>
-            <button type="button" onClick={() => { toFavotiresFunc(item.id); }}>
+          <HoveringIcon>
+            <StyledButton type="button" onClick={() => { toFavotiresFunc(item.id); }}>
               <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.9121 28.7685C17.8354 29.746 16.1779 29.7461 15.1013 28.7544L14.9454 28.6127C7.50795 21.8836 2.64878 17.4777 2.83295 11.981C2.91795 9.57272 4.15045 7.26355 6.14795 5.90355C9.88795 3.35355 14.5063 4.54355 16.9996 7.46188C19.4929 4.54355 24.1113 3.33938 27.8513 5.90355C29.8488 7.26355 31.0813 9.57272 31.1663 11.981C31.3646 17.4777 26.4913 21.8835 19.0538 28.641L18.9121 28.7685Z" fill={inFavList ? 'red' : 'white'} />
               </svg>
-            </button>
-          </div>
-          <div>
+            </StyledButton>
+          </HoveringIcon>
+          <HoveringIcon>
             <Link
               href={{
                 pathname: `/photo/${item.id}`,
@@ -138,8 +149,8 @@ export default function Photo({ item }) {
                 </svg>
               </a>
             </Link>
-          </div>
-          <div>
+          </HoveringIcon>
+          <HoveringIcon>
             <a
               href={`${item.links.download}?force=true`}
               rel="noreferrer"
@@ -152,7 +163,7 @@ export default function Photo({ item }) {
                 </g>
               </svg>
             </a>
-          </div>
+          </HoveringIcon>
         </Flex>
       </InfoWrapper>
     </ImageWrapper>
