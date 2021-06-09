@@ -12,25 +12,27 @@ const fetchPhoto = async (value = 'random', page = 1) => {
 
 export async function getStaticProps() {
   const { data: topicsListData } = await PhotosAPI.getTopicList();
-  const queryClient = new QueryClient();
+  const { data: photoListData } = await PhotosAPI.getPhotosList('random', 1);
+  // const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['photo'], () => fetchPhoto());
+  // await queryClient.prefetchQuery(['photo'], () => fetchPhoto());
 
   return {
     props: {
       topicsListData,
-      dehydratedState: dehydrate(queryClient),
+      photoListData,
+      // dehydratedState: dehydrate(queryClient),
     },
   };
 }
 
-export default function Home({ topicsListData }) {
+export default function Home({ topicsListData, photoListData }) {
   const [searchValue, setSearchValue] = React.useState('random');
-  const { data } = useQuery(['photo'], () => fetchPhoto(searchValue));
+  const { data } = useQuery(['photo', searchValue], () => fetchPhoto(searchValue), { initialData: photoListData });
   return (
     <>
       <Header topicsListData={topicsListData} setSearchValue={setSearchValue} />
-      <PhotosList photosListData={data.results} />
+      {data && <PhotosList photosListData={data.results} />}
     </>
   );
 }
